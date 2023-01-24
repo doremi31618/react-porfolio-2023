@@ -15,17 +15,19 @@ const Edit = () => {
   const { theme } = useTheme();
 
   const saveData = () => {
-    if (process.env.NODE_ENV === "development") {
-      fetch("/api/portfolio", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-    } else {
-      alert("This thing only works in development mode.");
-    }
+    // if (process.env.NODE_ENV === "development") {
+
+    // } else {
+    //   alert("This thing only works in development mode.");
+    // }
+
+    fetch("/api/portfolio", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
   };
 
   // Project Handler

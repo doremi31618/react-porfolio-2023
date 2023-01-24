@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Header from "../components/Header";
 import ServiceCard from "../components/ServiceCard";
 import Socials from "../components/Socials";
@@ -12,9 +12,29 @@ import Link from "next/link";
 import Cursor from "../components/Cursor";
 
 // Local Data
-import data from "../data/portfolio.json";
+import tempdata from "../data/portfolio.json";
+
+async function fetchHomepage() {
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+  }
+
+  let response = await fetch("https://Strapi-CMS.doremi31618.repl.co/api/setting?populate=*", {
+    method: "GET",
+    headers: headersList
+  });
+
+  let data = await response.json();//await JSON.parse(response);
+  console.log("homepage response", data);
+
+  return data;
+}
+
+
 
 export default function Home() {
+  const [data, setData] = useState(tempdata);
   // Ref
   const workRef = useRef();
   const aboutRef = useRef();
@@ -22,6 +42,52 @@ export default function Home() {
   const textTwo = useRef();
   const textThree = useRef();
   const textFour = useRef();
+
+  useEffect(async () => {
+    let homepageData = await fetchHomepage();
+
+    //check if validate data
+    if (!homepageData.data ){
+      console.log('failed to fetch data, terminate updating process')
+    }
+    
+    homepageData = homepageData.data.attributes;
+
+    //format social
+    let socials = [];
+    for (var _social of homepageData.socials.data) {
+      let social = {
+        id: _social.id,
+        title: _social.attributes.title,
+        link: _social.attributes.link
+      }
+      socials.push(social);
+    }
+    homepageData.socials = socials;
+
+    //format projects 
+    let projects = [];
+    for (var _project of homepageData.projects.data) {
+      let project = {
+        id: _project.id || 0,
+        title: _project.attributes.title || "project title",
+        url: _project.attributes.link || "./",
+        description: _project.attributes.description || "project description",
+        imageSrc: _project.attributes.image || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+      }
+      projects.push(project);
+    }
+    homepageData.projects = projects;
+    
+    console.log("format homepage data", homepageData);
+    setData(prevState => {
+      homepageData.resume = prevState.resume
+      return {
+        ...prevState,
+        ...homepageData
+      }
+    })
+  }, [])
 
   // Handling Scroll
   const handleWorkScroll = () => {

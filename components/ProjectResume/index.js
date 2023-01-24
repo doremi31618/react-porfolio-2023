@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProjectResume = ({ dates, type, position, bullets }) => {
+  console.log("[Project Resume Component] bullets : ", bullets)
   const [bulletsLocal, setBulletsLocal] = React.useState(bullets.split(","));
 
   return (

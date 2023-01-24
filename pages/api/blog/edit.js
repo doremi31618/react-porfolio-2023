@@ -4,8 +4,10 @@ import matter from "gray-matter";
 
 export default function handler(req, res) {
   const postsfolder = join(process.cwd(), `/_posts/`);
-  if (process.env.NODE_ENV === "development") {
-    if (req.method === "POST") {
+  // if (process.env.NODE_ENV === "development") {
+    
+  // }
+  if (req.method === "POST") {
       const { date, title, tagline, preview, image } = req.body.variables;
       fs.writeFile(
         postsfolder + req.body.slug + ".md",
@@ -25,5 +27,4 @@ export default function handler(req, res) {
         .status(200)
         .json({ name: "This route works in development mode only" });
     }
-  }
 }
