@@ -60,7 +60,7 @@ export default function Home() {
         let social = {
           id: _social.id,
           title: _social.attributes.title,
-          link: _social.attributes.link
+          link: _social.attributes.url
         }
         socials.push(social);
       }
@@ -72,7 +72,7 @@ export default function Home() {
         let project = {
           id: _project.id || 0,
           title: _project.attributes.title || "project title",
-          url: _project.attributes.link || "./",
+          url: _project.attributes.url || "./",
           description: _project.attributes.description || "project description",
           imageSrc: _project.attributes.image || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
         }
@@ -160,7 +160,7 @@ export default function Home() {
             </h1>
           </div>
 
-          <Socials className="mt-2 laptop:mt-5" />
+          <Socials className="mt-2 laptop:mt-5" socialDataList={data.socials}/>
         </div>
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0" ref={workRef}>
           <h1 className="text-2xl text-bold">Work.</h1>
