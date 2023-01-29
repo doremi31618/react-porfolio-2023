@@ -1,9 +1,9 @@
 {
-  "name": "Chetan",
+  "name": "EricZhan",
   "headerTaglineOne": "Hello 👋",
-  "headerTaglineTwo": "I'm Chetan Verma - curious",
-  "headerTaglineThree": "designer and devloper",
-  "headerTaglineFour": " based in New Delhi, India.",
+  "headerTaglineTwo": "I am Eric Zhan",
+  "headerTaglineThree": "Software Engineer & Interactive Designer",
+  "headerTaglineFour": " from Taipei, Taiwan",
   "showBlog": true,
   "darkMode": true,
   "showResume": true,
@@ -11,117 +11,93 @@
     {
       "id": "1",
       "title": "Github",
-      "link": "https://github.com/chetanverma16"
+      "link": "https://github.com/doremi31618"
     },
     {
       "id": "2",
       "title": "LinkedIn",
-      "link": "https://www.linkedin.com/in/chetanverma7/"
+      "link": "https://www.linkedin.com/in/%E9%96%94%E7%BF%94-%E8%A9%B9-053081141/"
     },
-    {
-      "id": "3",
-      "title": "Twitter",
-      "link": "https://twitter.com/realchetanverma"
-    },
-    { "id": "4", "title": "Blog", "link": "https://blog.chetanverma.com/" },
-    { "id": "5", "title": "Email", "link": "mailto:hello@chetanverma.com" }
+    { "id": "3", "title": "Blog", "link": "https://medium.com/@doremi31618" },
+    { "id": "4", "title": "Email", "link": "mailto:doremi31618@gmail.com" }
   ],
   "projects": [
     {
       "id": "1",
-      "title": "Project One Test",
-      "description": "Web Design",
+      "title": "classroom-ultra",
+      "description": "a livestream service made by mediasoup and socket.io",
       "imageSrc": "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
+      "url": "https://github.com/doremi31618/classroom-ultra"
     },
     {
       "id": "2",
-      "title": "Project Two",
-      "description": "Web Development",
-      "imageSrc": "https://images.unsplash.com/photo-1605153864431-a2795a1b2f95?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwyNTY3ODl8fGVufDB8fHw%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
+      "title": "babylonjs-world",
+      "description": "a webgl project engine made by babylonjs",
+      "imageSrc": "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+      "url": "https://github.com/doremi31618/BabylonJs-world"
     },
-    {
-      "id": "3",
-      "title": "Project Three",
-      "description": "Design",
-      "imageSrc": "https://images.unsplash.com/photo-1504083898675-c896ecdae86e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
-    },
-    {
-      "id": "4",
-      "title": "Project Four",
-      "description": "Marketing",
-      "imageSrc": "https://images.unsplash.com/photo-1492171983775-a51717616c0d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjB8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
-    },
-    {
-      "id": "5",
-      "title": "Project Five",
-      "description": "Development",
-      "imageSrc": "https://images.unsplash.com/photo-1534239143101-1b1c627395c5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NzZ8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
-    },
-    {
-      "id": "6",
-      "title": "Project Six",
-      "description": "Design & Development",
-      "imageSrc": "https://images.unsplash.com/photo-1517479149777-5f3b1511d5ad?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTAyfHxwYXN0ZWx8ZW58MHx8MHw%3D&auto=format&fit=crop&w=400&q=60",
-      "url": "http://chetanverma.com/"
-    }
   ],
   "services": [
     {
       "id": "1",
-      "title": "Art Direction",
-      "description": "We help with the creation and development of online advertising ideas, with particular focus on their visual appearance."
+      "title": "System Design",
+      "description": "I can help you to build a modern web application"
     },
     {
       "id": "2",
-      "title": "Branding",
-      "description": "We design key brand elements such as the logo, color scheme, typography, and other design components that makes your brand stand out from competitors."
+      "title": "Interactive Design ",
+      "description": "I Design interactive game scene by webgl or unity3d to mutiple platform"
     },
-    {
-      "id": "3",
-      "title": "Web Design",
-      "description": "We build and optimize your online presence.  Website is the digital entry point into your business and a powerful revenue channel."
-    },
-    {
-      "id": "4",
-      "title": "3D Design",
-      "description": "We combine creative design and technical skills to build striking 3D visualisations that bring your project to life."
-    }
   ],
-  "aboutpara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+  "aboutpara": "I am currently a Interactive Designer/Software Engineer. I graduated from the Interactive Design Department of National Taipei University of Technology. My creations focus on the possibilities of interactive multimedia and cross-domain cooperation, and I am happy to share educational articles that everyone can easily understand on the Internet platform. My works span interactive design, XR applications, body sensation and devices, and cross-border cooperation with cognitive psychology and art theater. I have also participated in many Ministry of Science and Technology projects. At present, I mainly focus on cross-domain research and development, and continue to explore new technologies and applications.",
   "resume": {
-    "tagline": "👋  I'm a software engineer, product designer, and maker.",
-    "description": "I have delivered world-class user experiences to millions of people. Well-versed with React, Javascript, and most of the Web frameworks.",
+    "tagline": "Software Engineer & Interactive Designer",
+    "description": "My creations focus on the possibilities of interactive multimedia and cross-domain cooperation",
     "experiences": [
       {
         "id": "1",
-        "dates": "March 2022 - Present",
+        "dates": "JANURARY 2018",
         "type": "Full Time",
-        "position": "Frontend Engineer at X",
-        "bullets": [
-          "Worked on the frontend of a React application",
-          "Worked on the frontend of a React application"
-        ]
+        "position": "Intern Interactive engineer (Rumu Innovation)",
+        "bullets": "Work on the Unity Interactive application"
+      },
+      
+      {
+        "id": "2",
+        "dates": "JUNE 2019 - 2020",
+        "type": "Full Time",
+        "position": "Intern Interactive engineer (if+)",
+        "bullets": "白晝之夜 - 眾獸鬧白晝,台達電 - 互動投影牆,舊振南 - 互動拍照機台,許願光之樹 （練習）,出缺勤統計軟體"
+      },
+      {
+        "id": "3",
+        "dates": "March 2020 - March 2022",
+        "type": "Full Time",
+        "position": "Research Associates (Taipei Medical University - Brain and consciousness research centre)",
+        "bullets": "Never Ending Maze,GKT (Guilty Knowledge Test)"
       },
       {
         "id": "2",
         "dates": "March 2020 - March 2022",
         "type": "Full Time",
-        "position": "Frontend Engineer at X",
-        "bullets": ["Worked on the frontend of a React application"]
+        "position": "Algorithm Engineer / Softewre Engineer (Panosensing)",
+        "bullets": "Develop antique restoration assosiative program with Unity3D,Develop Backend Service for art/designer to build project (demo)"
+      },
+      {
+        "id": "3",
+        "dates": "March 2020 - March 2022",
+        "type": "Full Time",
+        "position": "Product Manager / Tech Lead (Panosensing)",
+        "bullets": "classroom-ultra, babylonjs-world"
       }
     ],
     "education": {
-      "universityName": "University X",
-      "universityDate": "2016-2020",
-      "universityPara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+      "universityName": "NTUT - National Taipei University of Technology (Interactive Design)",
+      "universityDate": "2015-2020",
+      "universityPara": ""
     },
-    "languages": ["Javascript", "HTML5", "CSS", "Python"],
-    "frameworks": ["React", "Typescript", "NodeJs"],
-    "others": ["Figma", "AdobeXD", "AWS"]
+    "languages": ["Javascript", "HTML5", "CSS", "Python", "Java", "C#"],
+    "frameworks": ["React", "NodeJs", "unity3d", "threejs", "babylonjs", "opencv", "opengl"],
+    "others": ["Figma", "notion", "AWS"]
   }
 }
