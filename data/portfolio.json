@@ -5,7 +5,7 @@
   "headerTaglineThree": "Software Engineer & Interactive Designer",
   "headerTaglineFour": " from Taipei, Taiwan",
   "showBlog": true,
-  "darkMode": true,
+  "darkMode": false,
   "showResume": true,
   "socials": [
     {
@@ -62,7 +62,7 @@
         "dates": "JANURARY 2018",
         "type": "Full Time",
         "position": "Intern Interactive engineer (Rumu Innovation)",
-        "bullets": "Work on the Unity Interactive application"
+        "bullets": "Work on the Unity Interactive application,"
       },
       
       {
@@ -77,17 +77,17 @@
         "dates": "March 2020 - March 2022",
         "type": "Full Time",
         "position": "Research Associates (Taipei Medical University - Brain and consciousness research centre)",
-        "bullets": "Never Ending Maze,GKT (Guilty Knowledge Test)"
+        "bullets": "Never Ending Maze,GKT (Guilty Knowledge Test),"
       },
       {
-        "id": "2",
+        "id": "4",
         "dates": "March 2020 - March 2022",
         "type": "Full Time",
         "position": "Algorithm Engineer / Softewre Engineer (Panosensing)",
-        "bullets": "Develop antique restoration assosiative program with Unity3D,Develop Backend Service for art/designer to build project (demo)"
+        "bullets": "Develop antique restoration assosiative program with Unity3D,Develop Backend Service for art/designer to build project (demo),"
       },
       {
-        "id": "3",
+        "id": "5",
         "dates": "March 2020 - March 2022",
         "type": "Full Time",
         "position": "Product Manager / Tech Lead (Panosensing)",

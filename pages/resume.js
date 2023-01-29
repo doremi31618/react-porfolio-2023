@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// import React from "react"
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Cursor from "../components/Cursor";
 import Header from "../components/Header";
@@ -6,127 +7,119 @@ import ProjectResume from "../components/ProjectResume";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
-// Data
-// import { name, showResume } from "../data/portfolio.json";
-// import { resume } from "../data/portfolio.json";
+//// Data
+//// import { name, showResume } from "../data/portfolio.json";
+//// import { resume } from "../data/portfolio.json";
 import data from "../data/portfolio.json";
 
-const Resume = () => {
+async function fetchResume() {
+
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+  }
+
+  let response = await fetch("https://Strapi-CMS.doremi31618.repl.co/api/resume?populate=*", {
+    method: "GET",
+    headers: headersList
+  });
+
+  let data = await response.json();//await JSON.parse(response);
+  // console.log("resume response", data);
+
+  return data;
+
+
+}
+export default function Resume() {
   const router = useRouter();
   const theme = useTheme();
   const [mount, setMount] = useState(false);
   const [resume, setResume] = useState(data.resume);
   let { name, showResume } = resume;
 
-  useEffect(async () => {
+
+  useEffect(() => {
+    async function fetchData() {
+      let resumeData = await fetchResume();
+      console.log('resume data', resumeData);
+      //first test point
+      if (!resumeData.data) {
+        console.log('failed to fetch data');
+        return;
+      }
+
+      //format resume
+      resumeData = resumeData.data.attributes;
+
+      //format resume/ education
+      const universityName = resumeData.educations.data[0].name || "NTUT - National Taipei University of Technology (Interactive Design)";
+      const universityDate = resumeData.educations.data[0].date || "2015-2020";
+      const universityPara = resumeData.educations.data[0].para || "about university and major";
+      let education = {
+        universityName,
+        universityDate,
+        universityPara,
+      }
+      resumeData.education = education;
+
+      //format resume/ experiences
+      const experiences = [];
+      for (var _exp of resumeData.experiences.data) {
+        let bullets = "system design,software architect";//_exp.attributes.bullets !== null ? _exp.attributes.bullets.split("\n") : ["system design","software architect"]
+        let exp = {
+          id: _exp.id,
+          dates: _exp.attributes.date,
+          type: "FULL TIME",
+          position: _exp.attributes.position,
+          bullets,
+        }
+        experiences.push(exp)
+      }
+      resumeData.experiences = experiences;
+
+      //format resume/ language
+      const languages = [];
+      for (var _lan of resumeData.languages.data) {
+        let lan = _lan.attributes.name;
+        languages.push(lan);
+      }
+      resumeData.languages = languages;
+
+      //format resume/ framework
+      const frameworks = [];
+      for (var _framwork of resumeData.frameworks.data) {
+        let framework = _framwork.attributes.name;
+        frameworks.push(framework);
+      }
+      resumeData.frameworks = frameworks;
+
+
+      //format resume/ otherskill
+      const others = [];
+      for (var _other of resumeData.otherskills.data) {
+        let other = _other.attributes.name;
+        others.push(other);
+      }
+      resumeData.others = others;
+      setResume(prev => {
+        return {
+          ...prev,
+          ...resumeData
+        }
+      })
+    }
+    fetchData();
     setMount(true);
     // if (!showResume) {
     //   router.push("/");
     // }
-
-    async function fetchResume() {
-
-      let headersList = {
-        "Accept": "*/*",
-        "User-Agent": "Thunder Client (https://www.thunderclient.com)"
-      }
-
-      let response = await fetch("https://Strapi-CMS.doremi31618.repl.co/api/resume?populate=*", {
-        method: "GET",
-        headers: headersList
-      });
-
-      let data = await response.json();//await JSON.parse(response);
-      // console.log("resume response", data);
-
-      return data;
-
-
-    }
-
-    let resumeData = await fetchResume();
-    console.log('resume data', resumeData);
-    //first test point
-    if (!resumeData.data) {
-      console.log('failed to fetch data');
-      return;
-    }
-
-    //format resume
-    resumeData = resumeData.data.attributes;
-
-    //format resume/ education
-    const universityName = resumeData.educations.data[0].name || "NTUT - National Taipei University of Technology (Interactive Design)";
-    const universityDate = resumeData.educations.data[0].date || "2015-2020";
-    const universityPara = resumeData.educations.data[0].para || "about university and major";
-    let education = {
-      universityName,
-      universityDate,
-      universityPara,
-    }
-    resumeData.education = education;
-
-    //format resume/ experiences
-    const experiences = [];
-    for (var _exp of resumeData.experiences.data) {
-      let bullets = "system design,software architect";//_exp.attributes.bullets !== null ? _exp.attributes.bullets.split("\n") : ["system design","software architect"]
-      let exp = {
-        id: _exp.id,
-        dates: _exp.attributes.date,
-        type: "FULL TIME",
-        position: _exp.attributes.position,
-        bullets,
-      }
-      experiences.push(exp)
-    }
-    resumeData.experiences = experiences;
-
-    //format resume/ language
-    const languages = [];
-    for (var _lan of resumeData.languages.data) {
-      let lan = _lan.attributes.name;
-      languages.push(lan);
-    }
-    resumeData.languages = languages;
-
-    //format resume/ framework
-    const frameworks = [];
-    for (var _framwork of resumeData.frameworks.data) {
-      let framework = _framwork.attributes.name;
-      frameworks.push(framework);
-    }
-    resumeData.frameworks = frameworks;
-
-
-    //format resume/ otherskill
-    const others = [];
-    for (var _other of resumeData.otherskills.data) {
-      let other = _other.attributes.name;
-      others.push(other);
-    }
-    resumeData.others = others;
-    setResume(prev => {
-      return {
-        ...prev,
-        ...resumeData
-      }
-    })
-    /*
-
-    
-    */
   }, []);
+
+  // return <div>resume page ver1</div>
 
   return (
     <>
-      {process.env.NODE_ENV === "development" && (
-        <div className="fixed bottom-6 right-6">
-          <Button onClick={() => router.push("/edit")} type={"primary"}>
-            Edit Resume
-          </Button>
-        </div>
-      )}
-      {data.showCursor && <Cursor />}
       <div
         className={`container mx-auto mb-10 ${data.showCursor && "cursor-none"
           }`}
@@ -224,4 +217,16 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+
+
+/*
+export default function Resume(){
+  const router = useRouter();
+  const theme = useTheme();
+  const [mount, setMount] = useState(false);
+  const [resume, setResume] = useState(data.resume);
+  let {name, showResume} = resume;
+  
+  
+  
+*/

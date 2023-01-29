@@ -43,50 +43,53 @@ export default function Home() {
   const textThree = useRef();
   const textFour = useRef();
 
-  useEffect(async () => {
-    let homepageData = await fetchHomepage();
+  useEffect(() => {
+    async function fetchData() {
+      let homepageData = await fetchHomepage();
 
-    //check if validate data
-    if (!homepageData.data ){
-      console.log('failed to fetch data, terminate updating process')
-    }
-    
-    homepageData = homepageData.data.attributes;
+      //check if validate data
+      if (!homepageData.data) {
+        console.log('failed to fetch data, terminate updating process')
+      }
 
-    //format social
-    let socials = [];
-    for (var _social of homepageData.socials.data) {
-      let social = {
-        id: _social.id,
-        title: _social.attributes.title,
-        link: _social.attributes.link
-      }
-      socials.push(social);
-    }
-    homepageData.socials = socials;
+      homepageData = homepageData.data.attributes;
 
-    //format projects 
-    let projects = [];
-    for (var _project of homepageData.projects.data) {
-      let project = {
-        id: _project.id || 0,
-        title: _project.attributes.title || "project title",
-        url: _project.attributes.link || "./",
-        description: _project.attributes.description || "project description",
-        imageSrc: _project.attributes.image || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+      //format social
+      let socials = [];
+      for (var _social of homepageData.socials.data) {
+        let social = {
+          id: _social.id,
+          title: _social.attributes.title,
+          link: _social.attributes.link
+        }
+        socials.push(social);
       }
-      projects.push(project);
+      homepageData.socials = socials;
+
+      //format projects 
+      let projects = [];
+      for (var _project of homepageData.projects.data) {
+        let project = {
+          id: _project.id || 0,
+          title: _project.attributes.title || "project title",
+          url: _project.attributes.link || "./",
+          description: _project.attributes.description || "project description",
+          imageSrc: _project.attributes.image || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+        }
+        projects.push(project);
+      }
+      homepageData.projects = projects;
+
+      console.log("format homepage data", homepageData);
+      setData(prevState => {
+        homepageData.resume = prevState.resume
+        return {
+          ...prevState,
+          ...homepageData
+        }
+      })
     }
-    homepageData.projects = projects;
-    
-    console.log("format homepage data", homepageData);
-    setData(prevState => {
-      homepageData.resume = prevState.resume
-      return {
-        ...prevState,
-        ...homepageData
-      }
-    })
+    fetchData()
   }, [])
 
   // Handling Scroll
