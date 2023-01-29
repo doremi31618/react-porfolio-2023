@@ -7,7 +7,7 @@ import Cursor from "../../components/Cursor";
 import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
-import { getAllPosts } from "../../utils/api";
+import {  fetchAllPost } from "../../utils/api";
 const Blog = ({ posts }) => {
   const showBlog = useRef(data.showBlog);
   const text = useRef();
@@ -85,8 +85,8 @@ const Blog = ({ posts }) => {
                 posts.map((post) => (
                   <div
                     className="cursor-pointer relative"
-                    key={post.slug}
-                    onClick={() => Router.push(`/blog/${post.slug}`)}
+                    key={post.id}
+                    onClick={() => Router.push(`/blog/${post.id}`)}
                   >
                     <img
                       className="w-full h-60 rounded-lg shadow-lg object-cover"
@@ -102,7 +102,7 @@ const Blog = ({ posts }) => {
                       <div className="absolute top-0 right-0">
                         <Button
                           onClick={(e) => {
-                            deleteBlog(post.slug);
+                            deleteBlog(post.id);
                             e.stopPropagation();
                           }}
                           type={"primary"}
@@ -129,15 +129,18 @@ const Blog = ({ posts }) => {
 };
 
 export async function getStaticProps() {
-  const posts = getAllPosts([
+  const acquireField = [
     "slug",
     "title",
     "image",
     "preview",
     "author",
     "date",
-  ]);
-
+    "id"
+  ]
+  const posts = await fetchAllPost(acquireField);
+  // const _posts = getAllPosts(acquireField);
+  // console.log("getStaticProps posts", posts)
   return {
     props: {
       posts: [...posts],

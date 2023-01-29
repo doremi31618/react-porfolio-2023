@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { getPostBySlug, getAllPosts } from "../../utils/api";
+import { fetchAllPost, fetchPostBySlug, getAllPosts } from "../../utils/api";
 import Header from "../../components/Header";
 import ContentSection from "../../components/ContentSection";
 import Footer from "../../components/Footer";
@@ -78,7 +78,7 @@ const BlogPost = ({ post }) => {
 };
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
+  const post = await fetchPostBySlug(params.slug, [
     "date",
     "slug",
     "preview",
@@ -87,8 +87,9 @@ export async function getStaticProps({ params }) {
     "preview",
     "image",
     "content",
+    "id"
   ]);
-
+  console.log('[blog/slug.js]: getStaticProps', post);
   return {
     props: {
       post: {
@@ -99,13 +100,17 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
-
+  const acquireField = ["id"];
+  const posts = await fetchAllPost(acquireField);
+  console.log("id path", posts);
+  // const _posts = getAllPosts(acquireField);
+  const slugs = getAllPosts(["slug"]);
+  console.log('original', slugs)
   return {
     paths: posts.map((post) => {
       return {
         params: {
-          slug: post.slug,
+          slug: post.id,
         },
       };
     }),
