@@ -19,13 +19,18 @@ async function fetchHomepage() {
     "Accept": "*/*",
     "User-Agent": "Thunder Client (https://www.thunderclient.com)"
   }
-
-  let response = await fetch("https://Strapi-CMS.doremi31618.repl.co/api/setting?populate=*", {
+  let domainName = "https://Strapi-CMS.doremi31618.repl.co";
+  let api = "/api/setting?populate[0]=socials&populate[1]=projects.image&populate[2]=services"
+  let url = domainName + api;
+  let response = await fetch(url, {
     method: "GET",
     headers: headersList
   });
 
   let data = await response.json();//await JSON.parse(response);
+  data.data.attributes.url = url;
+  data.data.attributes.domain = domainName;
+  data.data.attributes.api = api;
   console.log("homepage response", data);
 
   return data;
@@ -46,7 +51,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       let homepageData = await fetchHomepage();
-
+      // console.log('fetch home page data', homepageData);
       //check if validate data
       if (!homepageData.data) {
         console.log('failed to fetch data, terminate updating process')
@@ -68,17 +73,33 @@ export default function Home() {
 
       //format projects 
       let projects = [];
+      //console.log("projects", homepageData.projects);
       for (var _project of homepageData.projects.data) {
+        let imageUrl = homepageData.domain +_project.attributes.image.data.attributes.url;
         let project = {
           id: _project.id || 0,
           title: _project.attributes.title || "project title",
           url: _project.attributes.url || "./",
           description: _project.attributes.description || "project description",
-          imageSrc: _project.attributes.image || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+          imageSrc: imageUrl || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
         }
+        // console.log('image src', project.imageSrc);
         projects.push(project);
       }
       homepageData.projects = projects;
+
+      //format services
+      let services = [];
+      for (var _service of homepageData.services.data) {
+        let service = {
+          id: _service.id || 0,
+          title: _service.attributes.title || "service title",
+          description: _service.attributes.description || "service description",
+        }
+        // console.log('image src', project.imageSrc);
+        services.push(service);
+      }
+      homepageData.services = services;
 
       console.log("format homepage data", homepageData);
       setData(prevState => {

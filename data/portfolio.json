@@ -5,7 +5,7 @@
   "headerTaglineThree": "Software Engineer & Interactive Designer",
   "headerTaglineFour": " from Taipei, Taiwan",
   "showBlog": true,
-  "darkMode": true,
+  "darkMode": false,
   "showResume": true,
   "socials": [
     {
