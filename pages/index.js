@@ -88,7 +88,6 @@ export default function Home({homepageData}) {
         <Header
           handleWorkScroll={handleWorkScroll}
           handleAboutScroll={handleAboutScroll}
-          isBlog={true}
         />
         <div className="laptop:mt-20 mt-10">
           <div className="mt-5">
