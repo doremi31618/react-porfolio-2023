@@ -13,7 +13,7 @@ import { useTheme } from "next-themes";
 import data from "../data/portfolio.json";
 
 
-export default function Resume({resumeData}) {
+export default function Resume({ resumeData }) {
   const router = useRouter();
   const theme = useTheme();
   const [mount, setMount] = useState(true);
@@ -21,21 +21,21 @@ export default function Resume({resumeData}) {
   let { name, showResume } = resume;
 
 
-  useEffect(async () => {
-    const resumeData = await fetchResume();
-    const formatData = await formatResume(resumeData);
-    setResume((prev)=>{
-      return {
-        ...prev,
-        ...formatData
-      }
-    })
-    // fetchData();
-    setMount(true);
-    // if (!showResume) {
-    //   router.push("/");
-    // }
-  }, []);
+  // useEffect(async () => {
+  //   // const resumeData = await fetchResume();
+  //   // const formatData = await formatResume(resumeData);
+  //   // setResume((prev)=>{
+  //   //   return {
+  //   //     ...prev,
+  //   //     ...formatData
+  //   //   }
+  //   // })
+  //   // fetchData();
+  //   setMount(true);
+  //   // if (!showResume) {
+  //   //   router.push("/");
+  //   // }
+  // }, []);
 
 
   return (
@@ -196,7 +196,7 @@ async function formatResume(resumeData) {
   const experiences = [];
   for (var _exp of resumeData.experiences.data) {
     let bullets = "system design,software architect";
-    bullets = _exp.attributes.bullets ? _exp.attributes.bullets.split("\n").join(','): "system design,software architect"
+    bullets = _exp.attributes.bullets ? _exp.attributes.bullets.split("\n").join(',') : "system design,software architect"
     let exp = {
       id: _exp.id,
       dates: _exp.attributes.date,
@@ -204,8 +204,8 @@ async function formatResume(resumeData) {
       position: _exp.attributes.position,
       bullets,
     }
-    
-    console.log('exp',exp);
+
+    console.log('exp', exp);
     experiences.push(exp)
   }
   resumeData.experiences = experiences;
