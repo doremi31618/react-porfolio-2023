@@ -42,7 +42,7 @@ export default function Resume() {
   useEffect(() => {
     async function fetchData() {
       let resumeData = await fetchResume();
-      console.log('resume data', resumeData);
+      // console.log('resume data', resumeData);
       //first test point
       if (!resumeData.data) {
         console.log('failed to fetch data');

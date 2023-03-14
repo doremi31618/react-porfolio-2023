@@ -7,76 +7,59 @@ import Cursor from "../../components/Cursor";
 import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
-import {  fetchAllPost } from "../../utils/api";
+// import {  fetchAllPost } from "../../utils/api";
 
-
-async function fetchBlogPreviews() {
+export async function fetchAllPost(fields = []) {
+  const db_url = "https://Strapi-CMS.doremi31618.repl.co"
+  const api_url = db_url + "/api/blogs?populate=*";
   let headersList = {
     "Accept": "*/*",
-    "Content-Type": "application/json"
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
   }
-  let gqlBody = 
-    {
-      query : `
-      query {
-        blogs {
-          data {
-            id
-            attributes{
-              title
-              preview
-              publishedAt
-              image{
-                data{
-                  id
-                    attributes{
-                      name
-                      url
-                  }
-                }
-              }
-            }
-          }
-            
-          meta {
-            pagination{
-              page
-              pageSize
-              pageCount
-              total
-            }
-          }
-        }
-      }
-    `
-    }
-  let bodyContent = JSON.stringify(gqlBody);
-  let domainName = "https://Strapi-CMS.doremi31618.repl.co";
-  let api = "/graphql"
-  let url = domainName + api;
-  let response = await fetch(url, {
-    method: "POST",
-    headers: headersList,
-    body: bodyContent
+
+  let response = await fetch(api_url, {
+    method: "GET",
+    headers: headersList
   });
 
-  let data = await response.json();//await JSON.parse(response);
-  data.data.attributes.url = url;
-  data.data.attributes.domain = domainName;
-  data.data.attributes.api = api;
-  console.log("homepage response", data);
+  let formatdata = await response.json();//await JSON.parse(response);
+  // console.log("post response", formatdata);
 
-  return data;
+  let posts = [];
+  for (let postData of formatdata.data){
+    let post = {};
+    for (let field of fields){
+      switch(field){
+        case "image":
+          post[field] = db_url + postData.attributes[field].data.attributes.url;
+          // console.log("img", post[field]);
+          break;
+        case "id":
+          post["id"] = postData["id"].toString();
+          break;
+        default:
+          post[field] = postData.attributes[field];
+          break;
+      }
+      
+    }
+    posts.push(post);
+  }
+  // console.log("format posts", posts);
+  return posts;
+
 }
 
 
-const Blog = ({ posts }) => {
+const Blog = ({ _posts }) => {
   const showBlog = useRef(data.showBlog);
+  const [posts, setPosts] = useState(_posts);
   const text = useRef();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
   //fetch blog from strapi
+  
 
   useIsomorphicLayoutEffect(() => {
     stagger(
@@ -90,10 +73,25 @@ const Blog = ({ posts }) => {
 
   useEffect(() => {
     async function fetchData(){
-      let blogsPreviewData = await fetchBlogPreviews();
-      console.log('fetch blogs', blogsPreviewData);
+      const acquireField = [
+        "slug",
+        "title",
+        "image",
+        "preview",
+        "author",
+        "date",
+        "id"
+      ]
+      const posts = await fetchAllPost(acquireField);
+      setPosts((prev)=>{
+        return [
+          ...prev,
+          ...posts
+        ]
+      })
       
     }
+    // fetchData();
     setMounted(true);
   }, []);
 
@@ -212,7 +210,7 @@ export async function getStaticProps() {
   // console.log("getStaticProps posts", posts)
   return {
     props: {
-      posts: [...posts],
+      _posts: [...posts],
     },
   };
 }

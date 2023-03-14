@@ -46,7 +46,25 @@ export async function fetchPostBySlug(id,fields = []) {
   return post;
 
 }
+export async function fetchResume() {
 
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+  }
+
+  let response = await fetch("https://Strapi-CMS.doremi31618.repl.co/api/resume?populate=*", {
+    method: "GET",
+    headers: headersList
+  });
+
+  let data = await response.json();//await JSON.parse(response);
+  // console.log("resume response", data);
+
+  return data;
+
+
+}
 export async function fetchHomepageData() {
   let headersList = {
     "Accept": "*/*",

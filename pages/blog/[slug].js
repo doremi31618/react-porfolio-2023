@@ -12,6 +12,41 @@ import { useRouter } from "next/router";
 import Cursor from "../../components/Cursor";
 import data from "../../data/portfolio.json";
 
+async function fecthBlog(id,fields = []){
+  const db_url = "https://Strapi-CMS.doremi31618.repl.co"
+  const api_url = db_url + `/api/blogs/${id}?populate=*`;
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+  }
+
+  let response = await fetch(api_url, {
+    method: "GET",
+    headers: headersList
+  });
+
+  let formatdata = await response.json();//await JSON.parse(response);
+  let postData = formatdata.data;
+  // console.log("post response", formatdata, "url", api_url);
+ let post = {};
+    for (let field of fields){
+      switch(field){
+        case "image":
+          post[field] = db_url + postData.attributes[field].data.attributes.url;
+          // console.log("img", post[field]);
+          break;
+        case "id":
+          post["id"] = postData["id"]
+          break;
+        default:
+          post[field] = postData.attributes[field];
+          break;
+      }
+      
+    }
+  return post;
+}
+
 const BlogPost = ({ post }) => {
   const [showEditor, setShowEditor] = useState(false);
   const textOne = useRef();

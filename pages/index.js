@@ -10,7 +10,7 @@ import Head from "next/head";
 import Button from "../components/Button";
 import Link from "next/link";
 import Cursor from "../components/Cursor";
-import {fetchHomepageData} from '../utils/api';
+// import {fetchHomepageData} from '../utils/api';
 
 // Local Data
 import tempdata from "../data/portfolio.json";
@@ -32,7 +32,7 @@ async function fetchHomepage() {
   data.data.attributes.url = url;
   data.data.attributes.domain = domainName;
   data.data.attributes.api = api;
-  console.log("homepage response", data);
+  // console.log("homepage response", data);
 
   return data;
 }
@@ -230,11 +230,11 @@ async function formatHomepageData(homepageData) {
       }
       homepageData.services = services;
 
-      console.log("format homepage data", homepageData);
+      // console.log("format homepage data", homepageData);
       return homepageData;
     }
 export async function getStaticProps() {
-  const homepageData = await fetchHomepageData();
+  const homepageData = await fetchHomepage();
   const formatData = await formatHomepageData(homepageData);
   
   return {
