@@ -197,7 +197,6 @@ async function formatResume(resumeData) {
   for (var _exp of resumeData.experiences.data) {
     let bullets = "system design,software architect";
     bullets = _exp.attributes.bullets ? _exp.attributes.bullets.split("\n").join(','): "system design,software architect"
-    console.log('bullets',_exp.attributes.bullets );
     let exp = {
       id: _exp.id,
       dates: _exp.attributes.date,
@@ -205,6 +204,8 @@ async function formatResume(resumeData) {
       position: _exp.attributes.position,
       bullets,
     }
+    
+    console.log('exp',exp);
     experiences.push(exp)
   }
   resumeData.experiences = experiences;
