@@ -49,19 +49,6 @@ export default function Home({homepageData}) {
   const textThree = useRef();
   const textFour = useRef();
 
-  //refetch data
-  useEffect(async ()=>{
-    const homepageData = await fetchHomepageData();
-    const formatData = await formatHomepageData(homepageData);
-     setData(prevState => {
-        formatData.resume = prevState.resume
-        return {
-          ...prevState,
-          ...formatData
-        }
-      })
-  },[])
-
   // Handling Scroll
   const handleWorkScroll = () => {
     window.scrollTo({
@@ -101,6 +88,7 @@ export default function Home({homepageData}) {
         <Header
           handleWorkScroll={handleWorkScroll}
           handleAboutScroll={handleAboutScroll}
+          isBlog={true}
         />
         <div className="laptop:mt-20 mt-10">
           <div className="mt-5">

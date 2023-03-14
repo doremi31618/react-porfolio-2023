@@ -74,10 +74,10 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleWorkScroll}>Work</Button>
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
-                    <Button onClick={() => { switchToPage("./blog") }}>Blog</Button>
+                    <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
                   )}
                   {showResume && (
-                    <Button onClick={() => { switchToPage("./resume") }}>Resume</Button>
+                    <Button onClick={() => { switchToPage("/resume") }}>Resume</Button>
                   )}
 
                   <Button
