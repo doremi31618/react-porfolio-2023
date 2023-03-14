@@ -16,12 +16,20 @@ import data from "../data/portfolio.json";
 export default function Resume({resumeData}) {
   const router = useRouter();
   const theme = useTheme();
-  const [mount, setMount] = useState(false);
+  const [mount, setMount] = useState(true);
   const [resume, setResume] = useState(resumeData);
   let { name, showResume } = resume;
 
 
-  useEffect(() => {
+  useEffect(async () => {
+    const resumeData = await fetchResume();
+    const formatData = await formatResume(resumeData);
+    setResume((prev)=>{
+      return {
+        ...prev,
+        ...formatData
+      }
+    })
     // fetchData();
     setMount(true);
     // if (!showResume) {
@@ -188,13 +196,14 @@ async function formatResume(resumeData) {
   const experiences = [];
   for (var _exp of resumeData.experiences.data) {
     let bullets = "system design,software architect";
-    _exp.attributes.bullets !== null ? _exp.attributes.bullets.split("\n") : ["system design","software architect"]
+    bullets = _exp.attributes.bullets ? _exp.attributes.bullets.split("\n").join(','): "system design,software architect"
+    console.log('bullets',_exp.attributes.bullets );
     let exp = {
       id: _exp.id,
       dates: _exp.attributes.date,
       type: "FULL TIME",
       position: _exp.attributes.position,
-      bullets : _exp.attributes.bullets,
+      bullets,
     }
     experiences.push(exp)
   }
