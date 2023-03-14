@@ -26,7 +26,7 @@ export async function fetchPostBySlug(id,fields = []) {
 
   let formatdata = await response.json();//await JSON.parse(response);
   let postData = formatdata.data;
-  console.log("post response", formatdata, "url", api_url);
+  // console.log("post response", formatdata, "url", api_url);
  let post = {};
     for (let field of fields){
       switch(field){
@@ -45,6 +45,27 @@ export async function fetchPostBySlug(id,fields = []) {
     }
   return post;
 
+}
+
+export async function fetchHomepageData() {
+  let headersList = {
+    "Accept": "*/*",
+    "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+  }
+  let domainName = "https://Strapi-CMS.doremi31618.repl.co";
+  let api = "/api/setting?populate[0]=socials&populate[1]=projects.image&populate[2]=services"
+  let url = domainName + api;
+  let response = await fetch(url, {
+    method: "GET",
+    headers: headersList
+  });
+
+  let data = await response.json();//await JSON.parse(response);
+  data.data.attributes.url = url;
+  data.data.attributes.domain = domainName;
+  data.data.attributes.api = api;
+
+  return data;
 }
 
 

@@ -10,6 +10,7 @@ import Head from "next/head";
 import Button from "../components/Button";
 import Link from "next/link";
 import Cursor from "../components/Cursor";
+import {fetchHomepageData} from '../utils/api';
 
 // Local Data
 import tempdata from "../data/portfolio.json";
@@ -38,8 +39,8 @@ async function fetchHomepage() {
 
 
 
-export default function Home() {
-  const [data, setData] = useState(tempdata);
+export default function Home({homepageData}) {
+  const [data, setData] = useState(homepageData);
   // Ref
   const workRef = useRef();
   const aboutRef = useRef();
@@ -48,70 +49,18 @@ export default function Home() {
   const textThree = useRef();
   const textFour = useRef();
 
-  useEffect(() => {
-    async function fetchData() {
-      let homepageData = await fetchHomepage();
-      // console.log('fetch home page data', homepageData);
-      //check if validate data
-      if (!homepageData.data) {
-        console.log('failed to fetch data, terminate updating process')
-      }
-
-      homepageData = homepageData.data.attributes;
-
-      //format social
-      let socials = [];
-      for (var _social of homepageData.socials.data) {
-        let social = {
-          id: _social.id,
-          title: _social.attributes.title,
-          link: _social.attributes.url
-        }
-        socials.push(social);
-      }
-      homepageData.socials = socials;
-
-      //format projects 
-      let projects = [];
-      //console.log("projects", homepageData.projects);
-      for (var _project of homepageData.projects.data) {
-        let imageUrl = homepageData.domain +_project.attributes.image.data.attributes.url;
-        let project = {
-          id: _project.id || 0,
-          title: _project.attributes.title || "project title",
-          url: _project.attributes.url || "./",
-          description: _project.attributes.description || "project description",
-          imageSrc: imageUrl || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
-        }
-        // console.log('image src', project.imageSrc);
-        projects.push(project);
-      }
-      homepageData.projects = projects;
-
-      //format services
-      let services = [];
-      for (var _service of homepageData.services.data) {
-        let service = {
-          id: _service.id || 0,
-          title: _service.attributes.title || "service title",
-          description: _service.attributes.description || "service description",
-        }
-        // console.log('image src', project.imageSrc);
-        services.push(service);
-      }
-      homepageData.services = services;
-
-      console.log("format homepage data", homepageData);
-      setData(prevState => {
-        homepageData.resume = prevState.resume
+  //refetch data
+  useEffect(async ()=>{
+    const homepageData = await fetchHomepageData();
+    const formatData = await formatHomepageData(homepageData);
+     setData(prevState => {
+        formatData.resume = prevState.resume
         return {
           ...prevState,
-          ...homepageData
+          ...formatData
         }
       })
-    }
-    fetchData()
-  }, [])
+  },[])
 
   // Handling Scroll
   const handleWorkScroll = () => {
@@ -229,4 +178,70 @@ export default function Home() {
       </div>
     </div>
   );
+}
+async function formatHomepageData(homepageData) {
+      // console.log('fetch home page data', homepageData);
+      //check if validate data
+      if (!homepageData.data) {
+        console.log('failed to fetch data, terminate updating process')
+      }
+
+      homepageData = homepageData.data.attributes;
+
+      //format social
+      let socials = [];
+      for (var _social of homepageData.socials.data) {
+        let social = {
+          id: _social.id,
+          title: _social.attributes.title,
+          link: _social.attributes.url
+        }
+        socials.push(social);
+      }
+      homepageData.socials = socials;
+
+      //format projects 
+      let projects = [];
+      //console.log("projects", homepageData.projects);
+      for (var _project of homepageData.projects.data) {
+        let imageUrl = homepageData.domain +_project.attributes.image.data.attributes.url;
+        let project = {
+          id: _project.id || 0,
+          title: _project.attributes.title || "project title",
+          url: _project.attributes.url || "./",
+          description: _project.attributes.description || "project description",
+          imageSrc: imageUrl || "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+        }
+        // console.log('image src', project.imageSrc);
+        projects.push(project);
+      }
+      homepageData.projects = projects;
+
+      //format services
+      let services = [];
+      for (var _service of homepageData.services.data) {
+        let service = {
+          id: _service.id || 0,
+          title: _service.attributes.title || "service title",
+          description: _service.attributes.description || "service description",
+        }
+        // console.log('image src', project.imageSrc);
+        services.push(service);
+      }
+      homepageData.services = services;
+
+      console.log("format homepage data", homepageData);
+      return homepageData;
+    }
+export async function getStaticProps() {
+  const homepageData = await fetchHomepageData();
+  const formatData = await formatHomepageData(homepageData);
+  
+  return {
+    props: {
+      homepageData: {
+        ...tempdata,
+        ...formatData},
+    },
+  };
 }

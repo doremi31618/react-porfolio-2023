@@ -8,11 +8,75 @@ import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
 import {  fetchAllPost } from "../../utils/api";
+
+
+async function fetchBlogPreviews() {
+  let headersList = {
+    "Accept": "*/*",
+    "Content-Type": "application/json"
+  }
+  let gqlBody = 
+    {
+      query : `
+      query {
+        blogs {
+          data {
+            id
+            attributes{
+              title
+              preview
+              publishedAt
+              image{
+                data{
+                  id
+                    attributes{
+                      name
+                      url
+                  }
+                }
+              }
+            }
+          }
+            
+          meta {
+            pagination{
+              page
+              pageSize
+              pageCount
+              total
+            }
+          }
+        }
+      }
+    `
+    }
+  let bodyContent = JSON.stringify(gqlBody);
+  let domainName = "https://Strapi-CMS.doremi31618.repl.co";
+  let api = "/graphql"
+  let url = domainName + api;
+  let response = await fetch(url, {
+    method: "POST",
+    headers: headersList,
+    body: bodyContent
+  });
+
+  let data = await response.json();//await JSON.parse(response);
+  data.data.attributes.url = url;
+  data.data.attributes.domain = domainName;
+  data.data.attributes.api = api;
+  console.log("homepage response", data);
+
+  return data;
+}
+
+
 const Blog = ({ posts }) => {
   const showBlog = useRef(data.showBlog);
   const text = useRef();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+
+  //fetch blog from strapi
 
   useIsomorphicLayoutEffect(() => {
     stagger(
@@ -25,6 +89,11 @@ const Blog = ({ posts }) => {
   }, []);
 
   useEffect(() => {
+    async function fetchData(){
+      let blogsPreviewData = await fetchBlogPreviews();
+      console.log('fetch blogs', blogsPreviewData);
+      
+    }
     setMounted(true);
   }, []);
 

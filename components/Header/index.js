@@ -8,7 +8,7 @@ import data from "../../data/portfolio.json";
 
 const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
   const router = useRouter();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme("dark");
   const [mounted, setMounted] = useState(true);
 
   const { name, showBlog, showResume } = data;
