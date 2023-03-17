@@ -7,7 +7,7 @@ import Cursor from "../../components/Cursor";
 import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
-// import {  fetchAllPost } from "../../utils/api";
+
 
 export async function fetchAllPost(fields = []) {
   const db_url = "https://Strapi-CMS.doremi31618.repl.co"
