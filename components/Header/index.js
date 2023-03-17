@@ -1,6 +1,7 @@
 import { Popover } from "@headlessui/react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import Link from 'next/link'
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 // Local Data
@@ -74,10 +75,12 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleWorkScroll}>Work</Button>
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
-                    <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
+                    // <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
+                    <Link href="/blog">Blog</Link>
                   )}
                   {showResume && (
-                    <Button onClick={() => { switchToPage("/resume") }}>Resume</Button>
+                    // <Button onClick={() => { switchToPage("/resume") }}>Resume</Button>
+                    <Link href="/resume">Resume</Link>
                   )}
 
                   <Button
@@ -88,19 +91,22 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                 </div>
               ) : (
                 <div className="grid grid-cols-1">
-                  <Button onClick={() => router.push("/")} classes="first:ml-1">
+{/*                   <Button onClick={() => router.push("/")} classes="first:ml-1">
                     Home
-                  </Button>
+                  </Button> */}
+                  <Link href="/">Home</Link>
                   {showBlog && (
-                    <Button onClick={() => router.push("/blog")}>Blog</Button>
+                    // <Button onClick={() => router.push("/blog")}>Blog</Button>
+                    <Link href="/blog">Blog</Link>
                   )}
                   {showResume && (
-                    <Button
-                      onClick={() => router.push("/resume")}
-                      classes="first:ml-1"
-                    >
-                      Resume
-                    </Button>
+                    // <Button
+                    //   onClick={() => router.push("/resume")}
+                    //   classes="first:ml-1"
+                    // >
+                    //   Resume
+                    // </Button>
+                    <Link href="/resume">Resume</Link>
                   )}
 
                   <Button

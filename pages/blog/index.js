@@ -153,7 +153,7 @@ const Blog = ({ _posts }) => {
                   <div
                     className="cursor-pointer relative"
                     key={post.id}
-                    onClick={() => Router.push(`/blog/${post.id}`)}
+                    onClick={() => Router.push(`/blog/${post.slug}`)}
                   >
                     <img
                       className="w-full h-60 rounded-lg shadow-lg object-cover"

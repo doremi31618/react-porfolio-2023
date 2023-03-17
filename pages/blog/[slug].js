@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { fetchAllPost, fetchPostBySlug, getAllPosts } from "../../utils/api";
+import { fetchAllPost, fetchPostById, getAllPosts, cache } from "../../utils/api";
 import Header from "../../components/Header";
 import ContentSection from "../../components/ContentSection";
 import Footer from "../../components/Footer";
@@ -57,6 +57,7 @@ const BlogPost = ({ post }) => {
     stagger([textOne.current, textTwo.current], { y: 30 }, { y: 0 });
   }, []);
 
+
   return (
     <>
       <Head>
@@ -111,9 +112,17 @@ const BlogPost = ({ post }) => {
     </>
   );
 };
-
-export async function getStaticProps({ params }) {
-  const post = await fetchPostBySlug(params.slug, [
+export async function getStaticProps({params}) {
+  let id = "undeined";
+  const acquireField = ["id", "slug"];
+  const posts = await fetchAllPost(acquireField);
+  for (var _post of posts){
+    if (_post.slug==params.slug){
+      id = _post.id;
+    }
+  }
+  if (id == "undeined")return;
+  const post = await fetchPostById(id, [
     "date",
     "slug",
     "preview",
@@ -135,20 +144,25 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const acquireField = ["id"];
+  const acquireField = ["id", "slug"];
   const posts = await fetchAllPost(acquireField);
+  
   console.log("id path", posts);
   // const _posts = getAllPosts(acquireField);
-  const slugs = getAllPosts(["slug"]);
-  console.log('original', slugs)
-  return {
-    paths: posts.map((post) => {
+  const slugs = getAllPosts(["slug", "id"]);
+  let paths = posts.map((post) => {
+      cache[post.slug] = post.id;
+    
+      console.log('set cache',cache,  post.slug, post.id)
       return {
         params: {
-          slug: post.id,
+          slug: post.slug,
         },
+        
       };
-    }),
+    })
+  return {
+    paths: paths,
     fallback: false,
   };
 }

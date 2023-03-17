@@ -49,6 +49,21 @@ export default function Home({homepageData}) {
   const textThree = useRef();
   const textFour = useRef();
 
+  useEffect(()=>{
+    async function fetchHomepage(){
+      let fetchData = await fetchHomepage();
+      let formatData = await formatHomepageData();
+
+      setData((prev)=>{
+        return {
+          ...prev,
+          ...formatData
+        }
+      })
+    }
+    fetchHomepage();
+  },[])
+
   // Handling Scroll
   const handleWorkScroll = () => {
     window.scrollTo({

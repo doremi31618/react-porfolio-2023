@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:dev" : "NODE_ENV=development next build",
-    "start:dev" : "NODE_ENV=development next start",
+    "build:dev": "NODE_ENV=development next build",
+    "start:dev": "NODE_ENV=development next start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -26,6 +26,7 @@
     "react-markdown": "^8.0.3",
     "react-syntax-highlighter": "^15.5.0",
     "react-textarea-autosize": "^8.3.4",
+    "rehype-raw": "^6.1.1",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
     "styled-components": "^5.3.5",

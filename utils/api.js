@@ -10,8 +10,8 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-
-export async function fetchPostBySlug(id,fields = []) {
+export const cache = {};
+export async function fetchPostById(id,fields = []) {
   const db_url = "https://Strapi-CMS.doremi31618.repl.co"
   const api_url = db_url + `/api/blogs/${id}?populate=*`;
   let headersList = {

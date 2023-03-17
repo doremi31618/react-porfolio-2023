@@ -25,7 +25,7 @@ Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots 
 
 #### This is Heading Four With Code Block
 
-```
+```python
 
 # Auto-generated based on the server's hostname.
 # Set this to the URL used to access the Firezone Web UI.
