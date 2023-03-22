@@ -76,7 +76,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
                     // <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
-                    <Link href="/blog">Blog</Link>
+                    <Link href="https://medium.com/ericzhan-publication">Blog</Link>
                   )}
                   {showResume && (
                     // <Button onClick={() => { switchToPage("/resume") }}>Resume</Button>
@@ -97,7 +97,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Link href="/">Home</Link>
                   {showBlog && (
                     // <Button onClick={() => router.push("/blog")}>Blog</Button>
-                    <Link href="/blog">Blog</Link>
+                    <Link href="https://medium.com/ericzhan-publication">Blog</Link>
                   )}
                   {showResume && (
                     // <Button
