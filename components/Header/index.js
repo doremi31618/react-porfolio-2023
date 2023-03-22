@@ -76,7 +76,8 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
                     // <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
-                    <Link href="https://medium.com/ericzhan-publication">Blog</Link>
+                  <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
+                    // <Link href="https://medium.com/ericzhan-publication">Blog</Link>
                   )}
                   {showResume && (
                     // <Button onClick={() => { switchToPage("/resume") }}>Resume</Button>
@@ -96,8 +97,8 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   </Button> */}
                   <Link href="/">Home</Link>
                   {showBlog && (
-                    // <Button onClick={() => router.push("/blog")}>Blog</Button>
-                    <Link href="https://medium.com/ericzhan-publication">Blog</Link>
+                    <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
+                    // <Link href="https://medium.com/ericzhan-publication">Blog</Link>
                   )}
                   {showResume && (
                     // <Button
@@ -135,7 +136,8 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
             <Button onClick={handleWorkScroll}>Work</Button>
             <Button onClick={handleAboutScroll}>About</Button>
             {showBlog && (
-              <Button onClick={() => switchToPage("/blog")}>Blog</Button>
+              // <Button onClick={() => switchToPage("/blog")}>Blog</Button>
+            <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
             )}
             {showResume && (
               <Button
@@ -164,7 +166,8 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
           <div className="flex">
             <Button onClick={() => router.push("/")}>Home</Button>
             {showBlog && (
-              <Button onClick={() => router.push("/blog")}>Blog</Button>
+              // <Button onClick={() => router.push("/blog")}>Blog</Button>
+            <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
             )}
             {showResume && (
               <Button

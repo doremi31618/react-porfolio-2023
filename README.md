@@ -2,4 +2,4 @@
 ref : https://github.com/chetanverma16/react-portfolio-template
 
 ### Update Log Record
-[3/22] add Interactive Portfolio, edit blogs content, header component link to mediuem
+[3/22] add Interactive Portfolio, edit blogs content, header component link to mediuem, push article
