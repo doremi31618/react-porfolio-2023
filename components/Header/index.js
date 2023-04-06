@@ -76,7 +76,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                   <Button onClick={handleAboutScroll}>About</Button>
                   {showBlog && (
                     // <Button onClick={() => { switchToPage("/blog") }}>Blog</Button>
-                  <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
+                    <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
                     // <Link href="https://medium.com/ericzhan-publication">Blog</Link>
                   )}
                   {showResume && (
@@ -92,7 +92,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                 </div>
               ) : (
                 <div className="grid grid-cols-1">
-{/*                   <Button onClick={() => router.push("/")} classes="first:ml-1">
+                  {/*                   <Button onClick={() => router.push("/")} classes="first:ml-1">
                     Home
                   </Button> */}
                   <Link href="/">Home</Link>
@@ -137,7 +137,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
             <Button onClick={handleAboutScroll}>About</Button>
             {showBlog && (
               // <Button onClick={() => switchToPage("/blog")}>Blog</Button>
-            <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
+              <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
             )}
             {showResume && (
               <Button
@@ -167,7 +167,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
             <Button onClick={() => router.push("/")}>Home</Button>
             {showBlog && (
               // <Button onClick={() => router.push("/blog")}>Blog</Button>
-            <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
+              <Button onClick={() => window.open("https://medium.com/ericzhan-publication")}>Blog</Button>
             )}
             {showResume && (
               <Button
